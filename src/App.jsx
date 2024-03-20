@@ -7,6 +7,7 @@ import { store } from "./redux/store";
 import axios from "axios";
 import { BASE_URL } from "./constants/server";
 import { setLoadUser } from "./redux/slices/authSlice";
+import CreateListingPage from "./Pages/CreateListingPage";
 
 const App = () => {
   useEffect(() => {
@@ -24,7 +25,6 @@ const App = () => {
     loadUser();
   }, []);
 
-
   return (
     <>
       <BrowserRouter>
@@ -32,6 +32,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/create-listing" element={<CreateListingPage />} />
         </Routes>
       </BrowserRouter>
     </>
