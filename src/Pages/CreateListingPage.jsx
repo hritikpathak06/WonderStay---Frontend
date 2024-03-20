@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../constants/server";
 
 const CreateListing = () => {
   const [category, setCategory] = useState("");
@@ -127,7 +128,7 @@ const CreateListing = () => {
       });
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/listing/create",
+        `${BASE_URL}/listing/create`,
         listingForm,
         {
           withCredentials: true,

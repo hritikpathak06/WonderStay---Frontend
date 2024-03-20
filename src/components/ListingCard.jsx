@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ListingCard = ({
   listingId,
   creator,
-  listingImages, // Corrected prop name
+  listingImages, 
   city,
   province,
   country,
@@ -14,7 +14,6 @@ const ListingCard = ({
   type,
   price,
 }) => {
-  // Slider For Images
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const navigate = useNavigate();

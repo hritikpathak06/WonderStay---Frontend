@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    listings:[]
+    listings:[],
+    listing:null
 }
 
 const listingSlice = createSlice({
@@ -10,10 +11,13 @@ const listingSlice = createSlice({
     reducers:{
         setListings:(state,action) => {
             state.listings = action.payload.listings
+        },
+        setListing:(state,action) => {
+          state.listing = action.payload.listing
         }
     }
 })
 
-export const {setListings} = listingSlice.actions;
+export const {setListings,setListing} = listingSlice.actions;
 
 export default listingSlice.reducer;

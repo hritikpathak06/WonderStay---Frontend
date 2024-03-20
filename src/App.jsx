@@ -8,6 +8,8 @@ import axios from "axios";
 import { BASE_URL } from "./constants/server";
 import { setLoadUser } from "./redux/slices/authSlice";
 import CreateListingPage from "./Pages/CreateListingPage";
+import ListingDetails from "./Pages/ListingDetails";
+import PaymentSuccess from "./Pages/PaymentSuccess";
 
 const App = () => {
   useEffect(() => {
@@ -33,6 +35,8 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/create-listing" element={<CreateListingPage />} />
+          <Route path="/properties/:id" element={<ListingDetails />} />
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         </Routes>
       </BrowserRouter>
     </>
