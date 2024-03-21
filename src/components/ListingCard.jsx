@@ -39,7 +39,7 @@ const ListingCard = ({
 
   const { user } = useSelector((state) => state.userData);
 
-  const isLike = user.wishList.find((item) => item._id === listingId);
+  const isLike = user?.wishList.find((item) => item._id === listingId);
 
   const addToWishList = async () => {
     try {
