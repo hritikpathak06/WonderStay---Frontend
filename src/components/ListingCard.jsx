@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import "../styles/ListingCard.scss";
-import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+import { ArrowLeft, ArrowRight, Favorite } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../constants/server";
 
 const ListingCard = ({
   listingId,
   creator,
-  listingImages, 
+  listingImages,
   city,
   province,
   country,
   category,
   type,
   price,
+  startDate,
+  endDate,
+  totalPrice,
+  booking,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -29,6 +37,24 @@ const ListingCard = ({
     setCurrentIndex((prevIndex) => (prevIndex + 1) % listingImages.length);
   };
 
+  const { user } = useSelector((state) => state.userData);
+
+  const isLike = user.wishList.find((item) => item._id === listingId);
+
+  const addToWishList = async () => {
+    try {
+      const { data } = await axios.put(
+        `${BASE_URL}/user/wishlist/${listingId}`,
+        null,
+        { withCredentials: true }
+      );
+      console.log(data);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="listing-card">
@@ -37,13 +63,15 @@ const ListingCard = ({
             className="slider"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {listingImages.map((image, index) => (
+            {listingImages?.map((image, index) => (
               <div key={index} className="slide">
                 <img
                   src={image.url}
                   alt={`photo ${index + 1}`}
                   onClick={() => {
-                    navigate(`/properties/${listingId}`);
+                    booking
+                      ? navigate(`/properties/${listingId._id}`)
+                      : navigate(`/properties/${listingId}`);
                   }}
                 />
                 <div className="prev-button" onClick={(e) => goToPrevSwipe(e)}>
@@ -60,10 +88,33 @@ const ListingCard = ({
           {city},{province},{country}
         </h3>
         <p>{category}</p>
-        <p>{type}</p>
-        <p>
-          <span>Rs: ${price}</span> per night
-        </p>
+        {!booking ? (
+          <>
+            <p>{type}</p>
+            <p>
+              <span>Rs: ${price}</span> per night
+            </p>
+          </>
+        ) : (
+          <>
+            <p style={{ fontSize: "10px" }}>
+              {moment(startDate).format("dddd, MMMM Do YYYY")} -{" "}
+              {moment(endDate).format("dddd, MMMM Do YYYY")}
+            </p>
+            <p>
+              <span>Rs: ${totalPrice}</span> total
+            </p>
+          </>
+        )}
+        {!booking && (
+          <div className="favorite" onClick={() => addToWishList()}>
+            {isLike ? (
+              <Favorite sx={{ color: "red" }} />
+            ) : (
+              <Favorite sx={{ color: "gray" }} />
+            )}
+          </div>
+        )}
       </div>
     </>
   );

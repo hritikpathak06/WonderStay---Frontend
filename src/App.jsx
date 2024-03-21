@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
@@ -10,6 +10,9 @@ import { setLoadUser } from "./redux/slices/authSlice";
 import CreateListingPage from "./Pages/CreateListingPage";
 import ListingDetails from "./Pages/ListingDetails";
 import PaymentSuccess from "./Pages/PaymentSuccess";
+import TripList from "./Pages/TripList";
+import WishListPage from "./Pages/WishListPage";
+import PropertListPage from "./Pages/PropertListPage";
 
 const App = () => {
   useEffect(() => {
@@ -37,6 +40,9 @@ const App = () => {
           <Route path="/create-listing" element={<CreateListingPage />} />
           <Route path="/properties/:id" element={<ListingDetails />} />
           <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+          <Route path="/trips/:id" element={<TripList />} />
+          <Route path="/wishlist" element={<WishListPage />} />
+          <Route path="/properties" element={<PropertListPage />} />
         </Routes>
       </BrowserRouter>
     </>
