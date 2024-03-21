@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { BASE_URL } from "../constants/server";
 
 const RegisterPage = () => {
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -36,11 +38,13 @@ const RegisterPage = () => {
     data.append("password", formData.password);
     data.append("image", formData.profileImage);
     try {
+      setLoading(true);
       const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
         body: data,
       });
       const responseData = await response.json();
+      setLoading(false);
       if (response.ok) {
         console.log("Registration successful");
         toast.success("Registration Successfull");
@@ -113,7 +117,9 @@ const RegisterPage = () => {
               <CloudUploadIcon />
               <p>Upload Your Profile</p>
             </label>
-            <button type="submit">Register</button>
+            <button type="submit" disabled={loading}>
+              Register
+            </button>
           </form>
           <NavLink to={"/login"}>Already Have an account ? Login here</NavLink>
         </div>

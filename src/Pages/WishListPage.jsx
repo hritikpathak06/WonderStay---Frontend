@@ -10,7 +10,9 @@ const WishListPage = () => {
     <>
       <Navbar />
       <div>
-        <h1 className="title-list">Your Wish List</h1>
+        <h1 className="title-list">
+          {user?.wishList.length < 1 ? "No Wishlist Found" : "Your Wish List"}
+        </h1>
         <div className="list">
           {user?.wishList?.map(
             ({

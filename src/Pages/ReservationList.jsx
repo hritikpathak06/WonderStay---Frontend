@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "../styles/TripList.scss";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import { BASE_URL } from "../constants/server";
-import { useDispatch, useSelector } from "react-redux";
-import { setTrips } from "../redux/slices/listingSlice";
+import axios from "axios";
 import Loader from "../components/Loader";
 import ListingCard from "../components/ListingCard";
 
-const TripList = () => {
-  const { id } = useParams();
-  const dispatch = useDispatch();
+const ReservationList = () => {
   const [loading, setLoading] = useState(true);
+  const [reservationLists, setReservationLists] = useState([]);
 
-  const { trips } = useSelector((state) => state.listing);
-
-  const getMyTrips = async () => {
+  const getMyReservations = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/user/trip/${id}`);
-      dispatch(
-        setTrips({
-          trips: data.trips,
-        })
-      );
+      const { data } = await axios.get(`${BASE_URL}/user/reservations`, {
+        withCredentials: true,
+      });
+      setReservationLists(data.reservations);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -31,8 +22,8 @@ const TripList = () => {
   };
 
   useEffect(() => {
-    getMyTrips();
-  }, [id]);
+    getMyReservations();
+  }, []);
 
   return (
     <>
@@ -42,12 +33,15 @@ const TripList = () => {
       ) : (
         <>
           <h1 className="title-list">
-            {trips?.length < 1 ? "No Trips Found" : "Your Trip List"}
+            {reservationLists.length < 1
+              ? "No Reservations Found"
+              : "Your Reservation List"}
           </h1>
           <div className="list">
-            {trips?.map(
+            {reservationLists?.map(
               ({
                 listingId,
+                hostId,
                 startDate,
                 endDate,
                 totalPrice,
@@ -55,14 +49,15 @@ const TripList = () => {
               }) => (
                 <ListingCard
                   listingId={listingId}
-                  startDate={startDate}
-                  endDate={endDate}
-                  totalPrice={totalPrice}
+                  creator={hostId._id}
                   listingImages={listingId.images}
                   city={listingId.city}
                   province={listingId.province}
                   country={listingId.country}
                   category={listingId.category}
+                  startDate={startDate}
+                  endDate={endDate}
+                  totalPrice={totalPrice}
                   booking={booking}
                 />
               )
@@ -74,4 +69,4 @@ const TripList = () => {
   );
 };
 
-export default TripList;
+export default ReservationList;

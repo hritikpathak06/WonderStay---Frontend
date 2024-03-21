@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import axios from "axios";
+import { useParams } from "react-router-dom";
 import { BASE_URL } from "../constants/server";
+import axios from "axios";
 import Loader from "../components/Loader";
-import "../styles/TripList.scss";
 import ListingCard from "../components/ListingCard";
 
-const PropertListPage = () => {
-  const [properties, setProerties] = useState([]);
+const SearchPage = () => {
   const [loading, setLoading] = useState(true);
+  const [searchResults, setSerachResults] = useState([]);
 
-  const getMyPropertiesHandler = async () => {
+  const { search } = useParams();
+
+  const getSearchListings = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/user/myProperties`, {
-        withCredentials: true,
-      });
-      setProerties(data.properties);
+      const { data } = await axios.get(`${BASE_URL}/listing/search/${search}`);
+      setSerachResults(data.listings);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -23,10 +23,10 @@ const PropertListPage = () => {
   };
 
   useEffect(() => {
-    getMyPropertiesHandler();
-  }, []);
+    getSearchListings();
+  }, [search]);
 
-  console.log("MY: ", properties);
+  console.log("Listings: ", searchResults);
 
   return (
     <>
@@ -36,12 +36,12 @@ const PropertListPage = () => {
       ) : (
         <>
           <h1 className="title-list">
-            {properties?.length < 1
-              ? "No Properties Found"
-              : "Your Property List"}
+            {searchResults.length < 1
+              ? "No Hotels Found"
+              : `You Found ${searchResults.length} Hotel`}
           </h1>
           <div className="list">
-            {properties?.map(
+            {searchResults?.map(
               ({
                 _id,
                 creator,
@@ -75,4 +75,4 @@ const PropertListPage = () => {
   );
 };
 
-export default PropertListPage;
+export default SearchPage;

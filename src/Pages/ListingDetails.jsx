@@ -51,66 +51,6 @@ const ListingDetails = () => {
 
   const { user } = useSelector((state) => state.userData);
 
-  //   try {
-  //     const {
-  //       data: { key },
-  //     } = await axios.get("http://localhost:5000/api/v1/payment/key", {
-  //       withCredentials: true,
-  //     });
-
-  //     const amount = 10000;
-
-  //     const {
-  //       data: { order },
-  //     } = await axios.post(
-  //       "http://localhost:5000/api/v1/payment/checkout",
-  //       { amount },
-  //       {
-  //         withCredentials: true,
-  //       }
-  //     );
-
-  //     const options = {
-  //       key,
-  //       amount: amount * 100, // Convert amount to the smallest currency unit (e.g., paise for INR)
-  //       currency: "INR",
-  //       name: "Ritik Kumar Pathak",
-  //       description: "Tutorial of RazorPay",
-  //       image: "smaple",
-  //       order_id: order.id,
-  //       callback_url: "http://localhost:5000/api/v1/payment/verify",
-  //       prefill: {
-  //         name: "Gaurav Kumar",
-  //         email: "gaurav.kumar@example.com",
-  //         contact: "9508318852",
-  //       },
-  //       notes: {
-  //         address: "Razorpay Corporate Office",
-  //       },
-  //       theme: {
-  //         color: "#121212",
-  //       },
-  //     };
-  //     const razor = new window.Razorpay(options);
-  //     razor.open();
-  //     const bookingForm = {
-  //       customerId: user._id,
-  //       listingId: id,
-  //       hostId: listing.creator._id,
-  //       startDate: dateRange[0].toDateString(),
-  //       endDate: dateRange[1].toDateString(),
-  //       totalPrice: listing.price * dayCount,
-  //     };
-  //     const { data } = await axios.post(
-  //       `${BASE_URL}/booking/create`,
-  //       bookingForm
-  //     );
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const handleBooking = async () => {
     try {
       const bookingForm = {
@@ -158,9 +98,9 @@ const ListingDetails = () => {
         order_id: order.id,
         callback_url: `${BASE_URL}/payment/verify`,
         prefill: {
-          name: "Gaurav Kumar",
-          email: "gaurav.kumar@example.com",
-          contact: "9508318852",
+          name: user.firstName,
+          email: user.email
+          // contact: "9508318852",
         },
         notes: {
           address: "Razorpay Corporate Office",
@@ -169,12 +109,9 @@ const ListingDetails = () => {
           color: "#121212",
         },
       };
-
-      handleBooking();
-
       const razor = new window.Razorpay(options);
-
       razor.open();
+      handleBooking();
     } catch (error) {
       console.log("Payment error:", error);
     }

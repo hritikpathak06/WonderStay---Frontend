@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
+import Loader from "../components/Loader";
 import axios from "axios";
 import { BASE_URL } from "../constants/server";
-import Loader from "../components/Loader";
-import "../styles/TripList.scss";
+import { useParams } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
 
-const PropertListPage = () => {
-  const [properties, setProerties] = useState([]);
+const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
+  const [categoriesData, setCategoriesData] = useState(null);
 
-  const getMyPropertiesHandler = async () => {
+  const { category } = useParams();
+
+  const getFilterByCategory = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/user/myProperties`, {
-        withCredentials: true,
-      });
-      setProerties(data.properties);
+      const { data } = await axios.get(
+        `${BASE_URL}/listing/filter?category=${category}`
+      );
+      setCategoriesData(data.listings);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -23,10 +25,8 @@ const PropertListPage = () => {
   };
 
   useEffect(() => {
-    getMyPropertiesHandler();
+    getFilterByCategory();
   }, []);
-
-  console.log("MY: ", properties);
 
   return (
     <>
@@ -36,12 +36,12 @@ const PropertListPage = () => {
       ) : (
         <>
           <h1 className="title-list">
-            {properties?.length < 1
-              ? "No Properties Found"
-              : "Your Property List"}
+            {categoriesData.length < 1
+              ? "No Data Found"
+              : `${category} listings`}
           </h1>
           <div className="list">
-            {properties?.map(
+            {categoriesData?.map(
               ({
                 _id,
                 creator,
@@ -75,4 +75,4 @@ const PropertListPage = () => {
   );
 };
 
-export default PropertListPage;
+export default CategoryPage;

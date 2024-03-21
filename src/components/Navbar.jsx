@@ -16,6 +16,8 @@ const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.userData);
   const [dropDownMenu, setDropDownMenu] = useState(false);
 
+  const [search, setSearch] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -38,8 +40,13 @@ const Navbar = () => {
           <img src={LOGO} alt="" />
         </NavLink>
         <div className="navbar_search">
-          <input type="text" placeholder="search...." />
-          <IconButton>
+          <input
+            type="text"
+            placeholder="search...."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <IconButton onClick={() => navigate(`/properties/search/${search}`)}>
             <SearchIcon sx={{ color: "red" }} />
           </IconButton>
         </div>
@@ -83,8 +90,8 @@ const Navbar = () => {
               <NavLink to={`/trips/${user._id}`}>Trip List</NavLink>
               <NavLink to={"/wishlist"}>Wish List</NavLink>
               <NavLink to={"/properties"}>Property List</NavLink>
-              <NavLink to={""}>Reservation List</NavLink>
-              <NavLink to={""}>Become A Host</NavLink>
+              <NavLink to={"/reservations"}>Reservation List</NavLink>
+              <NavLink to={"/create-listing"}>Become A Host</NavLink>
               <hr />
               <NavLink to={""} onClick={handleLogout}>
                 Logout

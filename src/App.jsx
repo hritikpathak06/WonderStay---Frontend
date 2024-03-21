@@ -13,6 +13,9 @@ import PaymentSuccess from "./Pages/PaymentSuccess";
 import TripList from "./Pages/TripList";
 import WishListPage from "./Pages/WishListPage";
 import PropertListPage from "./Pages/PropertListPage";
+import ReservationList from "./Pages/ReservationList";
+import CategoryPage from "./Pages/CategoryPage";
+import SearchPage from "./Pages/SearchPage";
 
 const App = () => {
   useEffect(() => {
@@ -20,7 +23,6 @@ const App = () => {
       const { data } = await axios.get(`${BASE_URL}/auth/me`, {
         withCredentials: true,
       });
-      console.log(data);
       store.dispatch(
         setLoadUser({
           user: data.user,
@@ -43,6 +45,13 @@ const App = () => {
           <Route path="/trips/:id" element={<TripList />} />
           <Route path="/wishlist" element={<WishListPage />} />
           <Route path="/properties" element={<PropertListPage />} />
+          <Route path="/reservations" element={<ReservationList />} />
+
+          <Route
+            path="/properties/category/:category"
+            element={<CategoryPage />}
+          />
+          <Route path="/properties/search/:search" element={<SearchPage />} />
         </Routes>
       </BrowserRouter>
     </>

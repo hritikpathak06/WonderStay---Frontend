@@ -92,7 +92,7 @@ const ListingCard = ({
           <>
             <p>{type}</p>
             <p>
-              <span>Rs: ${price}</span> per night
+              <span>Rs:{price}</span> per night
             </p>
           </>
         ) : (
@@ -102,7 +102,7 @@ const ListingCard = ({
               {moment(endDate).format("dddd, MMMM Do YYYY")}
             </p>
             <p>
-              <span>Rs: ${totalPrice}</span> total
+              <span>Rs:{totalPrice}</span> total
             </p>
           </>
         )}
