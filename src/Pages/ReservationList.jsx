@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 import ListingCard from "../components/ListingCard";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../components/Footer";
 
 const ReservationList = () => {
   const [loading, setLoading] = useState(true);

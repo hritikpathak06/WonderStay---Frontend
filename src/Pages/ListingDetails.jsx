@@ -11,6 +11,7 @@ import { facilities } from "../components/Categories";
 import { Calendar } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { store } from "../redux/store";
+import Footer from "../components/Footer";
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -253,6 +254,7 @@ const ListingDetails = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </>
   );
 };

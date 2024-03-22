@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTrips } from "../redux/slices/listingSlice";
 import Loader from "../components/Loader";
 import ListingCard from "../components/ListingCard";
+import Footer from "../components/Footer";
 
 const TripList = () => {
   const { id } = useParams();

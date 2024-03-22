@@ -5,6 +5,7 @@ import { BASE_URL } from "../constants/server";
 import axios from "axios";
 import Loader from "../components/Loader";
 import ListingCard from "../components/ListingCard";
+import Footer from "../components/Footer";
 
 const SearchPage = () => {
   const [loading, setLoading] = useState(true);
@@ -71,6 +72,7 @@ const SearchPage = () => {
           </div>
         </>
       )}
+      <Footer/>
     </>
   );
 };

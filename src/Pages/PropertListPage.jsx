@@ -7,6 +7,7 @@ import "../styles/TripList.scss";
 import ListingCard from "../components/ListingCard";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../components/Footer";
 
 const PropertListPage = () => {
   const [properties, setProerties] = useState([]);

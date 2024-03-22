@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { BASE_URL } from "../constants/server";
+import Footer from "../components/Footer";
 
 const CreateListing = () => {
   const [category, setCategory] = useState("");
@@ -459,7 +460,7 @@ const CreateListing = () => {
                 required
               />
               <p>Now, set your PRICE</p>
-              <span>$</span>
+              <span>Rs:</span>
               <input
                 type="number"
                 placeholder="100"
@@ -478,7 +479,7 @@ const CreateListing = () => {
         </form>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

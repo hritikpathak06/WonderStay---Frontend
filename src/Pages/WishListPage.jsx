@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import ListingCard from "../components/ListingCard";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const WishListPage = () => {
   const { user } = useSelector((state) => state.userData);

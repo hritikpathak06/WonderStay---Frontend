@@ -5,6 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "../constants/server";
 import { useParams } from "react-router-dom";
 import ListingCard from "../components/ListingCard";
+import Footer from "../components/Footer";
 
 const CategoryPage = () => {
   const [loading, setLoading] = useState(true);
@@ -71,6 +72,7 @@ const CategoryPage = () => {
           </div>
         </>
       )}
+      <Footer/>
     </>
   );
 };
