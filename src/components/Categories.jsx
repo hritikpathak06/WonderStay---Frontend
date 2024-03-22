@@ -1,12 +1,59 @@
-import { AcUnit, Balcony, BeachAccessOutlined, BrandingWatermarkOutlined, Camera, Campaign, CarCrashOutlined, Castle, ContactSupport, CookieRounded, Diamond, Dining, DirectionsBoatFilledSharp, DownhillSkiing, DryRounded, EventRepeatOutlined, FireExtinguisher, FlashAutoSharp, ForestOutlined, FreeBreakfastOutlined, Gradient, HearingRounded, HeatPump, Hiking, IosShareOutlined, Iron, Key, Microwave, OutdoorGrill, PeopleAltSharp, Pets, PivotTableChart, Pool, Room, Shower, SnowboardingOutlined, Soap, ThermostatRounded, Tv, VillaOutlined, WashRounded, Wifi, WindowOutlined, WorkspacePremium } from "@mui/icons-material";
-import "../styles/Categories.scss"
+import {
+  AcUnit,
+  Balcony,
+  BeachAccessOutlined,
+  BrandingWatermarkOutlined,
+  Camera,
+  Campaign,
+  CarCrashOutlined,
+  Castle,
+  ContactSupport,
+  CookieRounded,
+  Diamond,
+  Dining,
+  DirectionsBoatFilledSharp,
+  DownhillSkiing,
+  DryRounded,
+  EventRepeatOutlined,
+  FireExtinguisher,
+  FlashAutoSharp,
+  ForestOutlined,
+  FreeBreakfastOutlined,
+  Gradient,
+  HearingRounded,
+  HeatPump,
+  Hiking,
+  IosShareOutlined,
+  Iron,
+  Key,
+  Microwave,
+  OutdoorGrill,
+  PeopleAltSharp,
+  Pets,
+  PivotTableChart,
+  Pool,
+  Room,
+  Shower,
+  SnowboardingOutlined,
+  Soap,
+  ThermostatRounded,
+  Tv,
+  VillaOutlined,
+  WashRounded,
+  Wifi,
+  WindowOutlined,
+  WorkspacePremium,
+} from "@mui/icons-material";
+import "../styles/Categories.scss";
 import { Link } from "react-router-dom";
 import { BiFirstAid, BiWorld } from "react-icons/bi";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export const categories = [
   {
     label: "All",
-    icon: <BiWorld/>
+    icon: <BiWorld />,
   },
   {
     img: "assets/beach_cat.jpg",
@@ -35,7 +82,7 @@ export const categories = [
   {
     img: "assets/pool_cat.jpg",
     label: "Amazing Pools",
-    icon: <Pool/>,
+    icon: <Pool />,
     description: "This is property has a beautiful pool!",
   },
   {
@@ -44,61 +91,60 @@ export const categories = [
     icon: <IosShareOutlined />,
     description: "This property is on an island!",
   },
-{
-  img: "assets/lake_cat.webp",
-  label: "Lakefront",
-  icon: <DirectionsBoatFilledSharp/>,
-  description: "This property is near a lake!",
-},
-{
-  img: "assets/skiing_cat.jpg",
-  label: "Ski-in/out",
-  icon: <DownhillSkiing />,
-  description: "This property has skiing activies!",
-},
-{
-  img: "assets/castle_cat.webp",
-  label: "Castles",
-  icon: <Castle/>,
-  description: "This property is an ancient castle!",
-},
-{
-  img: "assets/cave_cat.jpg",
-  label: "Caves",
-  icon: <EventRepeatOutlined />,
-  description: "This property is in a spooky cave!",
-},
-{
-  img: "assets/camping_cat.jpg",
-  label: "Camping",
-  icon: <ForestOutlined/>,
-  description: "This property offers camping activities!",
-},
-{
-  img: "assets/arctic_cat.webp",
-  label: "Arctic",
-  icon: <SnowboardingOutlined/>,
-  description: "This property is in arctic environment!",
-},
-{
-  img: "assets/desert_cat.webp",
-  label: "Desert",
-  icon: <ContactSupport/>,
-  description: "This property is in the desert!",
-},
-{
-  img: "assets/barn_cat.jpg",
-  label: "Barns",
-  icon: <BrandingWatermarkOutlined />,
-  description: "This property is in a barn!",
-},
-{
-  img: "assets/lux_cat.jpg",
-  label: "Luxury",
-  icon: <Diamond />,
-  description: "This property is brand new and luxurious!",
-},
-  
+  {
+    img: "assets/lake_cat.webp",
+    label: "Lakefront",
+    icon: <DirectionsBoatFilledSharp />,
+    description: "This property is near a lake!",
+  },
+  {
+    img: "assets/skiing_cat.jpg",
+    label: "Ski-in/out",
+    icon: <DownhillSkiing />,
+    description: "This property has skiing activies!",
+  },
+  {
+    img: "assets/castle_cat.webp",
+    label: "Castles",
+    icon: <Castle />,
+    description: "This property is an ancient castle!",
+  },
+  {
+    img: "assets/cave_cat.jpg",
+    label: "Caves",
+    icon: <EventRepeatOutlined />,
+    description: "This property is in a spooky cave!",
+  },
+  {
+    img: "assets/camping_cat.jpg",
+    label: "Camping",
+    icon: <ForestOutlined />,
+    description: "This property offers camping activities!",
+  },
+  {
+    img: "assets/arctic_cat.webp",
+    label: "Arctic",
+    icon: <SnowboardingOutlined />,
+    description: "This property is in arctic environment!",
+  },
+  {
+    img: "assets/desert_cat.webp",
+    label: "Desert",
+    icon: <ContactSupport />,
+    description: "This property is in the desert!",
+  },
+  {
+    img: "assets/barn_cat.jpg",
+    label: "Barns",
+    icon: <BrandingWatermarkOutlined />,
+    description: "This property is in a barn!",
+  },
+  {
+    img: "assets/lux_cat.jpg",
+    label: "Luxury",
+    icon: <Diamond />,
+    description: "This property is brand new and luxurious!",
+  },
 ];
 
 export const types = [
@@ -111,7 +157,7 @@ export const types = [
     name: "Room(s)",
     description:
       "Guests have their own room in a house, plus access to shared places",
-    icon: <Room/>,
+    icon: <Room />,
   },
   {
     name: "A Shared Room",
@@ -128,7 +174,7 @@ export const facilities = [
   },
   {
     name: "Personal care products",
-    icon: <Soap/>,
+    icon: <Soap />,
   },
   {
     name: "Outdoor shower",
@@ -136,31 +182,31 @@ export const facilities = [
   },
   {
     name: "Washer",
-    icon: <WashRounded/>,
+    icon: <WashRounded />,
   },
   {
     name: "Dryer",
-    icon: <DryRounded/>,
+    icon: <DryRounded />,
   },
   {
     name: "Hangers",
-    icon: <HearingRounded/>,
+    icon: <HearingRounded />,
   },
   {
     name: "Iron",
-    icon: <Iron/>,
+    icon: <Iron />,
   },
   {
     name: "TV",
-    icon: <Tv/>,
+    icon: <Tv />,
   },
   {
     name: "Dedicated workspace",
-    icon: <WorkspacePremium/>,
+    icon: <WorkspacePremium />,
   },
   {
     name: "Air Conditioning",
-    icon: <AcUnit/>,
+    icon: <AcUnit />,
   },
   {
     name: "Heating",
@@ -180,7 +226,7 @@ export const facilities = [
   },
   {
     name: "Wifi",
-    icon: <Wifi/>,
+    icon: <Wifi />,
   },
   {
     name: "Cooking set",
@@ -208,7 +254,7 @@ export const facilities = [
   },
   {
     name: "Private patio or Balcony",
-    icon: <Balcony/>,
+    icon: <Balcony />,
   },
   {
     name: "Camp fire",
@@ -233,14 +279,31 @@ export const facilities = [
 ];
 
 const Categories = () => {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setShow(true);
+  }, []);
+
   return (
     <div className="categories">
-      <h1>Explore Top Categories</h1>
-      <p>
+      <motion.h1
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1.5, delay: 1, ease: "circInOut" }}
+        style={{ visibility: show ? "visible" : "hidden" }}
+      >
+        Explore Top Categories
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 3, delay: 1 }}
+      >
         Explore our wide range of vacation rentals that cater to all types of
         travelers. Immerse yourself in the local culture, enjoy the comforts of
         home, and create unforgettable memories in your dream destination.
-      </p>
+      </motion.p>
 
       <div className="categories_list">
         {categories?.slice(1, 10).map((category, index) => (

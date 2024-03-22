@@ -5,10 +5,16 @@ import { BASE_URL } from "../constants/server";
 import Loader from "../components/Loader";
 import "../styles/TripList.scss";
 import ListingCard from "../components/ListingCard";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PropertListPage = () => {
   const [properties, setProerties] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { user } = useSelector((state) => state.userData);
+
+  const navigate = useNavigate();
 
   const getMyPropertiesHandler = async () => {
     try {
@@ -25,6 +31,12 @@ const PropertListPage = () => {
   useEffect(() => {
     getMyPropertiesHandler();
   }, []);
+
+  useEffect(() => {
+    if(!user){
+      return navigate("/login")
+    }
+  },[user])
 
   console.log("MY: ", properties);
 

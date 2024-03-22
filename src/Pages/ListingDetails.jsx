@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/ListingDetails.scss";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../constants/server";
 import { setListing } from "../redux/slices/listingSlice";
@@ -48,6 +48,8 @@ const ListingDetails = () => {
   const end = new Date(dateRange[1]);
   const diffInMs = end.getTime() - start.getTime();
   const dayCount = Math.round(diffInMs / (1000 * 60 * 60 * 24));
+
+  const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.userData);
 
@@ -99,7 +101,7 @@ const ListingDetails = () => {
         callback_url: `${BASE_URL}/payment/verify`,
         prefill: {
           name: user.firstName,
-          email: user.email
+          email: user.email,
           // contact: "9508318852",
         },
         notes: {
@@ -202,24 +204,49 @@ const ListingDetails = () => {
                   <h2>Total Price: ${listing.price * dayCount} </h2>
                   <p>Start Date: {start.toLocaleDateString()}</p>
                   <p>End Date: {end.toLocaleDateString()}</p>
-                  <button
-                    className="button"
-                    type="submit"
-                    style={{
-                      background: "red",
-                      padding: "20px 50px",
-                      color: "white",
-                      borderRadius: "20px",
-                      marginTop: "20px",
-                      cursor: "pointer",
-                      border: 0,
-                      width: "80%",
-                      marginLeft: "auto",
-                    }}
-                    onClick={handleSubmit}
-                  >
-                    Book Now
-                  </button>
+                  {user ? (
+                    <>
+                      <button
+                        className="button"
+                        type="submit"
+                        style={{
+                          background: "red",
+                          padding: "20px 50px",
+                          color: "white",
+                          borderRadius: "20px",
+                          marginTop: "20px",
+                          cursor: "pointer",
+                          border: 0,
+                          width: "80%",
+                          marginLeft: "auto",
+                        }}
+                        onClick={handleSubmit}
+                      >
+                        Book Now
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="button"
+                        type="submit"
+                        style={{
+                          background: "red",
+                          padding: "20px 50px",
+                          color: "white",
+                          borderRadius: "20px",
+                          marginTop: "20px",
+                          cursor: "pointer",
+                          border: 0,
+                          width: "80%",
+                          marginLeft: "auto",
+                        }}
+                        onClick={() => navigate("/login")}
+                      >
+                        Login
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

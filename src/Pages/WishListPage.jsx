@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import ListingCard from "../components/ListingCard";
+import { useNavigate } from "react-router-dom";
 
 const WishListPage = () => {
   const { user } = useSelector((state) => state.userData);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!user){
+      return navigate("/login")
+    }
+  })
 
   return (
     <>

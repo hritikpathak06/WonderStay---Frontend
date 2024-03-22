@@ -6,7 +6,7 @@ import {
   Remove,
 } from "@mui/icons-material";
 import { categories, types, facilities } from "../components/Categories";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -51,24 +51,6 @@ const CreateListing = () => {
   };
 
   const { user } = useSelector((state) => state.userData);
-  //   const files = Array.from(e.target.files);
-  //   // setImages([]);
-  //   setlistingPhotos([]);
-  //   setImagesPreview([]);
-
-  //   files.forEach((file) => {
-  //     const reader = new FileReader();
-
-  //     reader.onload = () => {
-  //       if (reader.readyState === 2) {
-  //         setImagesPreview((old) => [...old, reader.result]);
-  //         setlistingPhotos((old) => [...old, reader.result]);
-  //       }
-  //     };
-
-  //     reader.readAsDataURL(file);
-  //   });
-  // };
 
   const [formDescription, setFormDescription] = useState({
     title: "",
@@ -146,6 +128,13 @@ const CreateListing = () => {
       toast.error(err.message);
     }
   };
+
+  useEffect(() => {
+   if(!user){
+    navigate("/login")
+   }
+  },[user]);
+
 
   return (
     <>

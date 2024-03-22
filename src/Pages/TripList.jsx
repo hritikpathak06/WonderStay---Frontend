@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/TripList.scss";
 import Navbar from "../components/Navbar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../constants/server";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,11 @@ const TripList = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
+  const navigate = useNavigate();
+
   const { trips } = useSelector((state) => state.listing);
+
+  const { user } = useSelector((state) => state.userData);
 
   const getMyTrips = async () => {
     try {
@@ -33,6 +37,12 @@ const TripList = () => {
   useEffect(() => {
     getMyTrips();
   }, [id]);
+
+  useEffect(() => {
+    if(!user){
+      return navigate("/login")
+    }
+  })
 
   return (
     <>

@@ -4,10 +4,16 @@ import { BASE_URL } from "../constants/server";
 import axios from "axios";
 import Loader from "../components/Loader";
 import ListingCard from "../components/ListingCard";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ReservationList = () => {
   const [loading, setLoading] = useState(true);
   const [reservationLists, setReservationLists] = useState([]);
+
+  const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.userData);
 
   const getMyReservations = async () => {
     try {
@@ -24,6 +30,12 @@ const ReservationList = () => {
   useEffect(() => {
     getMyReservations();
   }, []);
+
+  useEffect(() => {
+    if (!user) {
+      return navigate("/login");
+    }
+  });
 
   return (
     <>
