@@ -195,11 +195,11 @@ const ListingDetails = () => {
                 <div className="selected-dates">
                   {dayCount > 1 ? (
                     <h2>
-                      ${listing.price} X {dayCount} nights
+                      Rs:{listing.price} X {dayCount} nights
                     </h2>
                   ) : (
                     <h2>
-                      ${listing.price} X {dayCount} night
+                      Rs:{listing.price} X {dayCount} night
                     </h2>
                   )}
                   <h2>Total Price: ${listing.price * dayCount} </h2>
